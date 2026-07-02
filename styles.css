@@ -14,7 +14,9 @@
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; font-size: 118.75%; } /* ~19px base scales all rem sizing up */
+
+@media (max-width: 600px) { html { font-size: 106.25%; } } /* ~17px on phones */
 
 body {
   font-family: "Inter", system-ui, sans-serif;
@@ -33,7 +35,7 @@ h1, h2, h3, .logo, .price {
 
 .container {
   width: 100%;
-  max-width: 640px;
+  max-width: 720px;
   margin: 0 auto;
   padding: 0 24px;
 }
@@ -108,7 +110,7 @@ h1, h2, h3, .logo, .price {
 /* Reel */
 .reel {
   position: relative;
-  width: 200px;
+  width: 240px;
   aspect-ratio: 9 / 16;
   margin: 0 auto 32px;
   border-radius: 16px;
