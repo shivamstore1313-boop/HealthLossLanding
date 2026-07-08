@@ -110,7 +110,7 @@ h1, h2, h3, .logo, .price {
 /* Reel */
 .reel {
   position: relative;
-  width: 380px;
+  width: 340px;
   aspect-ratio: 9 / 16;
   margin: 0 auto 32px;
   border-radius: 16px;
