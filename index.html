@@ -1,244 +1,844 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hi">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Khud Ke Liye — Complete Transformation Program</title>
-  <meta name="description" content="2 hafte mein pehen ke khud ko mirror mein dekho — bina gym, bina khana chode." />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css?v=2" />
+  <title>Khud Ke Liye — Apni Favourite Dress Fir Se Pehno</title>
+  <style>
+    :root {
+      --cream: #FBF7F2;
+      --warm-white: #FFFFFF;
+      --terracotta: #C1432A;
+      --terracotta-light: #F5EAE7;
+      --teal: #2D5249;
+      --gold: #D4A017;
+      --text-dark: #1A1A1A;
+      --text-soft: #5A5A5A;
+      --border: #E8DDD6;
+      --green: #22C55E;
+      --red-x: #EF4444;
+    }
 
-  <!-- Meta Pixel Code -->
-  <script>
-  !function(f,b,e,v,n,t,s)
-  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-  n.queue=[];t=b.createElement(e);t.async=!0;
-  t.src=v;s=b.getElementsByTagName(e)[0];
-  s.parentNode.insertBefore(t,s)}(window, document,'script',
-  'https://connect.facebook.net/en_US/fbevents.js');
-  fbq('init', '333263999459581');
-  fbq('track', 'PageView');
-  </script>
-  <noscript>
-  <img height="1" width="1" style="display:none"
-  src="https://www.facebook.com/tr?id=333263999459581&ev=PageView&noscript=1"/>
-  </noscript>
-  <!-- End Meta Pixel Code -->
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: var(--cream);
+      color: var(--text-dark);
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    /* HEADER */
+    .header {
+      background: var(--warm-white);
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .logo {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--terracotta);
+    }
+    .rating-badge {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      color: var(--text-soft);
+    }
+    .stars-gold { color: var(--gold); font-size: 13px; }
+
+    /* HERO */
+    .hero {
+      background: var(--warm-white);
+      padding: 20px 16px 24px;
+    }
+    .hero-eyebrow {
+      background: var(--terracotta-light);
+      color: var(--terracotta);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: 20px;
+      display: inline-block;
+      margin-bottom: 12px;
+    }
+    .hero h1 {
+      font-size: 28px;
+      font-weight: 800;
+      line-height: 1.2;
+      color: var(--text-dark);
+      margin-bottom: 8px;
+    }
+    .hero h1 span { color: var(--terracotta); }
+    .hero-sub {
+      font-size: 14px;
+      color: var(--text-soft);
+      margin-bottom: 16px;
+    }
+
+    /* VIDEO */
+    .video-wrap {
+      border-radius: 14px;
+      overflow: hidden;
+      margin-bottom: 16px;
+      background: #000;
+      position: relative;
+      cursor: pointer;
+    }
+    .video-wrap img {
+      width: 100%;
+      display: block;
+      opacity: 0.9;
+    }
+    .play-overlay {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 56px;
+      height: 56px;
+      background: rgba(255,255,255,0.9);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .play-overlay svg { width: 24px; height: 24px; fill: var(--terracotta); margin-left: 4px; }
+    .video-iframe {
+      display: none;
+      width: 100%;
+      aspect-ratio: 9/16;
+      border: none;
+    }
+    .video-wrap.playing img,
+    .video-wrap.playing .play-overlay { display: none; }
+    .video-wrap.playing .video-iframe { display: block; }
+
+    /* FEATURE ICONS */
+    .feature-icons {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+    .feature-icon {
+      background: var(--cream);
+      border-radius: 10px;
+      padding: 10px 6px;
+      text-align: center;
+      font-size: 11px;
+      color: var(--text-soft);
+    }
+    .feature-icon span { display: block; font-size: 20px; margin-bottom: 4px; }
+
+    /* PRICE BOX */
+    .price-box {
+      background: var(--cream);
+      border-radius: 14px;
+      padding: 16px;
+      margin-bottom: 16px;
+    }
+    .price-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 4px;
+    }
+    .price-original {
+      font-size: 14px;
+      color: var(--text-soft);
+      text-decoration: line-through;
+    }
+    .price-label { font-size: 12px; color: var(--terracotta); font-weight: 600; }
+    .price-main {
+      font-size: 36px;
+      font-weight: 800;
+      color: var(--terracotta);
+    }
+    .price-note { font-size: 12px; color: var(--text-soft); margin-bottom: 12px; }
+    .trust-row {
+      display: flex;
+      gap: 12px;
+      font-size: 12px;
+      color: var(--teal);
+      margin-bottom: 12px;
+    }
+    .trust-row span { display: flex; align-items: center; gap: 4px; }
+
+    /* BUTTONS */
+    .btn-primary {
+      display: block;
+      width: 100%;
+      background: var(--terracotta);
+      color: white;
+      text-align: center;
+      padding: 16px;
+      border-radius: 10px;
+      font-size: 16px;
+      font-weight: 700;
+      text-decoration: none;
+      letter-spacing: 0.02em;
+      margin-bottom: 8px;
+    }
+    .btn-secure {
+      text-align: center;
+      font-size: 11px;
+      color: var(--text-soft);
+    }
+    .delivery-note {
+      text-align: center;
+      font-size: 12px;
+      color: var(--teal);
+      font-weight: 600;
+      margin-top: 8px;
+    }
+
+    /* SECTION */
+    section { padding: 28px 16px; }
+    .section-eyebrow {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--terracotta);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .section-title {
+      font-size: 22px;
+      font-weight: 800;
+      line-height: 1.3;
+      margin-bottom: 16px;
+    }
+
+    /* PAIN POINTS */
+    .pain { background: var(--warm-white); }
+    .pain-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    .pain-card {
+      background: var(--cream);
+      border-radius: 10px;
+      padding: 12px;
+      font-size: 13px;
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+    }
+    .pain-card span { font-size: 18px; flex-shrink: 0; }
+
+    /* IMAGINE */
+    .imagine {
+      background: var(--terracotta);
+      color: white;
+      padding: 28px 16px;
+    }
+    .imagine .section-eyebrow { color: rgba(255,255,255,0.7); }
+    .imagine .section-title { color: white; }
+    .imagine-list { list-style: none; }
+    .imagine-list li {
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.2);
+      font-size: 14px;
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+    }
+    .imagine-list li:last-child { border-bottom: none; }
+    .check-white { color: #A8E6CF; font-size: 16px; }
+
+    /* TRANSFORMATIONS */
+    .transformations { background: var(--warm-white); }
+    .testimonial-card {
+      background: var(--cream);
+      border-radius: 14px;
+      padding: 16px;
+      margin-bottom: 16px;
+    }
+    .before-after {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+    .before-after figure { position: relative; }
+    .before-after img {
+      width: 100%;
+      border-radius: 10px;
+      display: block;
+      object-fit: cover;
+      height: 180px;
+    }
+    .ba-label {
+      position: absolute;
+      bottom: 8px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0,0,0,0.7);
+      color: white;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 2px 10px;
+      border-radius: 20px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .testimonial-name {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--terracotta);
+      margin-bottom: 2px;
+    }
+    .testimonial-loc { font-size: 12px; color: var(--text-soft); margin-bottom: 6px; }
+    .stars { color: var(--gold); font-size: 14px; margin-bottom: 8px; }
+    .testimonial-card p { font-size: 13px; color: var(--text-soft); margin-bottom: 6px; line-height: 1.6; }
+
+    /* WHATSAPP REVIEWS */
+    .wa-reviews { background: var(--cream); }
+    .wa-chat {
+      background: #E9FBE9;
+      border-radius: 12px;
+      padding: 12px 14px;
+      margin-bottom: 10px;
+      font-size: 13px;
+      position: relative;
+      max-width: 85%;
+    }
+    .wa-chat::before {
+      content: '';
+      position: absolute;
+      left: -8px;
+      top: 12px;
+      border: 8px solid transparent;
+      border-right-color: #E9FBE9;
+      border-left: 0;
+    }
+    .wa-time { font-size: 10px; color: #888; margin-top: 4px; text-align: right; }
+    .wa-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+    .wa-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--terracotta);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    /* WHAT YOU GET */
+    .benefits { background: var(--warm-white); }
+    .benefit-list { list-style: none; }
+    .benefit-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .benefit-item:last-child { border-bottom: none; }
+    .benefit-icon { font-size: 22px; flex-shrink: 0; }
+    .benefit-text strong { display: block; font-size: 14px; margin-bottom: 2px; }
+    .benefit-text span { font-size: 12px; color: var(--text-soft); }
+
+    /* VS TABLE */
+    .vs-section { background: var(--cream); }
+    .vs-table {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 0;
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    .vs-col { padding: 0; }
+    .vs-header {
+      padding: 12px;
+      text-align: center;
+      font-size: 13px;
+      font-weight: 700;
+    }
+    .vs-header.bad { background: #FEE2E2; color: var(--red-x); }
+    .vs-header.good { background: #DCFCE7; color: var(--teal); }
+    .vs-middle-header {
+      padding: 12px 8px;
+      background: var(--text-dark);
+      color: white;
+      font-weight: 800;
+      font-size: 14px;
+      text-align: center;
+    }
+    .vs-row {
+      display: contents;
+    }
+    .vs-cell {
+      padding: 10px 12px;
+      font-size: 12px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .vs-cell.bad { background: #fff; color: var(--text-soft); }
+    .vs-cell.good { background: #F0FDF4; color: var(--teal); }
+    .vs-cell.mid { background: #F8F8F8; border-top: 1px solid #eee; }
+    .x-icon { color: var(--red-x); font-size: 14px; }
+    .check-icon { color: var(--green); font-size: 14px; }
+
+    /* FAQ */
+    .faq { background: var(--warm-white); }
+    .faq-item {
+      border-bottom: 1px solid var(--border);
+    }
+    .faq-q {
+      width: 100%;
+      background: none;
+      border: none;
+      padding: 14px 0;
+      text-align: left;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--terracotta);
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .faq-a {
+      font-size: 13px;
+      color: var(--text-soft);
+      padding-bottom: 14px;
+      display: none;
+      line-height: 1.6;
+    }
+    .faq-a.open { display: block; }
+
+    /* FINAL CTA */
+    .final-cta { background: var(--warm-white); padding: 28px 16px; }
+    .final-offer {
+      background: var(--cream);
+      border: 2px solid var(--terracotta);
+      border-radius: 16px;
+      padding: 20px 16px;
+      text-align: center;
+      margin-bottom: 16px;
+    }
+    .offer-badge {
+      background: var(--terracotta);
+      color: white;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 14px;
+      border-radius: 20px;
+      display: inline-block;
+      margin-bottom: 12px;
+    }
+    .offer-original {
+      font-size: 14px;
+      color: var(--text-soft);
+      text-decoration: line-through;
+      margin-bottom: 4px;
+    }
+    .offer-price {
+      font-size: 48px;
+      font-weight: 800;
+      color: var(--terracotta);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+    .offer-save {
+      background: #FEF3C7;
+      color: #92400E;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 3px 12px;
+      border-radius: 20px;
+      display: inline-block;
+      margin-bottom: 12px;
+    }
+    .payment-methods {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 8px;
+    }
+    .pm-badge {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 4px 10px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-soft);
+    }
+
+    /* TRUST BADGES */
+    .trust-badges {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-top: 16px;
+    }
+    .trust-badge {
+      text-align: center;
+      font-size: 11px;
+      color: var(--text-soft);
+    }
+    .trust-badge span { display: block; font-size: 22px; margin-bottom: 4px; }
+
+    /* FUTURE */
+    .future { background: var(--terracotta); padding: 28px 16px; text-align: center; }
+    .future h2 { color: white; font-size: 22px; font-weight: 800; margin-bottom: 8px; }
+    .future p { color: rgba(255,255,255,0.85); font-size: 14px; margin-bottom: 16px; }
+    .future img { width: 100%; max-width: 280px; border-radius: 14px; margin: 0 auto 20px; display: block; }
+
+    /* FOOTER */
+    footer {
+      background: var(--warm-white);
+      border-top: 1px solid var(--border);
+      padding: 24px 16px;
+      text-align: center;
+    }
+    .footer-logo { font-size: 18px; font-weight: 700; color: var(--terracotta); margin-bottom: 4px; }
+    .footer-tagline { font-size: 12px; color: var(--text-soft); margin-bottom: 12px; }
+    .footer-links { font-size: 12px; margin-bottom: 8px; }
+    .footer-links a { color: var(--terracotta); text-decoration: none; margin: 0 6px; }
+    .footer-copy { font-size: 11px; color: var(--text-soft); }
+    .footer-contact { font-size: 12px; color: var(--text-soft); margin-bottom: 8px; }
+    .footer-contact a { color: var(--terracotta); }
+  </style>
 </head>
 <body>
 
-  <!-- Header -->
-  <header class="site-header">
-    <div class="container header-inner">
-      <a href="#" class="logo">Khud Ke Liye</a>
+<!-- HEADER -->
+<header class="header">
+  <div class="logo">Khud Ke Liye ❤️</div>
+  <div class="rating-badge">
+    <span class="stars-gold">★ 4.9/5</span>
+    <span>1000+ Women</span>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-eyebrow">Complete 90 Day Home Transformation Program</div>
+  <h1>Apni Favourite Dress<br /><span>Fir Se Pehno ❤️</span></h1>
+  <p class="hero-sub">Sirf 10–15 minute daily, bina gym, bina strict diet. Normal ghar ka khana khao aur khud ko fir se confident feel karo.</p>
+
+  <!-- VIDEO -->
+  <div class="video-wrap" id="videoWrap" onclick="playVideo()">
+    <img src="https://img.youtube.com/vi/IlsJGDzXMPI/maxresdefault.jpg" alt="Khud Ke Liye Program" />
+    <div class="play-overlay">
+      <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
     </div>
-  </header>
-
-  <main>
-    <!-- Hero -->
-    <section class="hero">
-      <div class="container hero-inner">
-        <p class="eyebrow">KHUD KE LIYE</p>
-        <h1>Woh dress jo fit nahi aati<br />bina gym, bina diet, ghar pe fix karo!</h1>
-        <p class="hero-sub">2 hafte mein pehen ke khud ko mirror mein dekho — bina gym, bina khana chode</p>
-
-        <div class="reel" id="reel" data-video="IlsJGDzXMPI">
-  <img class="reel-thumb" src="https://img.youtube.com/vi/IlsJGDzXMPI/maxresdefault.jpg" alt="Khud Ke Liye Program" />
-  <div class="reel-badge">
-    <span class="reel-badge-icon"></span>
-    <span>
-      <strong>Khud Ke Liye</strong><br />
-      3 Month Transformation Program
-    </span>
+    <iframe class="video-iframe" id="videoFrame"
+      src=""
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen></iframe>
   </div>
-  <button class="play-btn" aria-label="Play video">
-    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z" /></svg>
-  </button>
-  <span class="reel-share">&#8631;</span>
-</div>
 
-        <a href="https://rzp.io/rzp/fTl1FXTi" target="_blank" class="btn btn-primary hero-cta">Apna plan abhi lo</a>
-        <p style="font-size:13px; color:#2D5249; font-weight:600; margin-top:8px; text-align:center;">✅ Payment ke baad WhatsApp pe turant poora plan mil jaayega!</p>
-      </div>
-    </section>
-
-    <!-- Pain points -->
-    <section class="pain">
-      <div class="container">
-        <h2 class="section-title">Kya aap bhi aisa<br />feel karti hain?</h2>
-        <ul class="pain-list">
-          <li>Sab dost slim hain, main akeli alag lagti hoon</li>
-          <li>Gym jaane ka time nahi, ghar ka khana chodna bhi nahi</li>
-          <li>Photos mein achi nahi lagti, tag hone se darna lagta hai</li>
-        </ul>
-      </div>
-    </section>
-
-    <!-- Program -->
-    <section class="program">
-      <div class="container">
-        <div class="program-card">
-          <h2>Ek simple program — koi gym<br />nahi, koi diet change nahi</h2>
-          <p>Ghar ka khana wahi rahega. Hafte mein sirf 6 din, sirf 10&ndash;15 minute ki halki exercise. Khana khane ka order thoda change hoga, kuch simple cheezein add hongi. Koi supplement nahi, koi powder nahi — sirf real, sustainable changes.</p>
-          <ul class="check-list">
-            <li>10&ndash;15 minute daily, 6 days a week</li>
-            <li>Roti, chawal, daal - kuch nahi chodna</li>
-            <li>No supplements, no extra cost</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <!-- Benefits -->
-    <section class="benefits">
-      <div class="container">
-        <h2 class="section-title">Aapko kya milega</h2>
-        <div class="benefit-grid">
-          <div class="benefit-card">
-            <span class="benefit-icon">&#128197;</span>
-            <p>3 mahine ka complete step-by-step plan</p>
-          </div>
-          <div class="benefit-card">
-            <span class="benefit-icon">&#128147;</span>
-            <p>Daily 10&ndash;15 minute easy home exercises</p>
-          </div>
-          <div class="benefit-card">
-            <span class="benefit-icon">&#127860;</span>
-            <p>Khane ki aadaton mein practical changes</p>
-          </div>
-          <div class="benefit-card">
-            <span class="benefit-icon">&#128161;</span>
-            <p>Simple bhasha mein samjhaya gaya, koi confusion nahi</p>
-          </div>
-        </div>
-        <p style="text-align:center; font-size:14px; color:#2D5249; font-weight:600; margin-top:16px;">
-📱 Payment ke baad turant WhatsApp pe deliver hoga!
-</p>
-      </div>
-    </section>
-
-    <!-- Testimonials -->
-    <section class="testimonials">
-      <div class="container">
-        <h2 class="section-title testimonial-title">Unki kahani, unke alfaaz</h2>
-        <div class="testimonial-card">
-          <div class="testimonial-photos">
-            <figure>
-              <img class="photo" src="lady-before.webp" alt="Asha pehle" loading="lazy" />
-              <figcaption>Pehle</figcaption>
-            </figure>
-            <figure>
-              <img class="photo" src="lady-after.webp" alt="Asha ab" loading="lazy" />
-              <figcaption>Ab</figcaption>
-            </figure>
-          </div>
-          <div class="testimonial-body">
-            <h3>Asha</h3>
-            <p class="testimonial-loc">Lucknow</p>
-            <p class="stars" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</p>
-            <p>Honestly mujhe zyada umeed nahi thi. Gym join kiya tha, 2 hafte mein band kar diya. Diet try ki, kuch nahi hua. Par is baar sirf khane ka order change kiya — bas itna!</p>
-<p>2-3 hafte mein hi clothes loose hone lage. Face pe glow aaya — dosto ne bhi notice kiya! Aur energy itni badh gayi ki din bhar kaam karne mein mann lagta hai.</p>
-<p>Koi bhari diet nahi, koi gym nahi — sirf sahi tarika. Itna simple tha aur itna effective — khud hairaan hoon!</p>
-          </div>
-        </div>
-        <div class="testimonial-card">
-  <div class="testimonial-photos">
-    <figure>
-      <img class="photo" src="riti-before.webp.jpeg" alt="Riti pehle" loading="lazy" />
-      <figcaption>Pehle</figcaption>
-    </figure>
-    <figure>
-      <img class="photo" src="riti-after.webp.jpeg" alt="Riti ab" loading="lazy" />
-      <figcaption>Ab</figcaption>
-    </figure>
+  <!-- FEATURE ICONS -->
+  <div class="feature-icons">
+    <div class="feature-icon"><span>🏠</span>Home Workout</div>
+    <div class="feature-icon"><span>🍛</span>Indian Food</div>
+    <div class="feature-icon"><span>⏱️</span>10–15 Min Daily</div>
+    <div class="feature-icon"><span>🔒</span>Secure Razorpay</div>
   </div>
-  <div class="testimonial-body">
-    <h3>Riti</h3>
-    <p class="testimonial-loc">Jaipur</p>
-    <p class="stars" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</p>
+
+  <!-- PRICE -->
+  <div class="price-box">
+    <div class="price-row">
+      <span class="price-label">Worth</span>
+      <span class="price-original">₹1999</span>
+      <span class="price-label">Today Only</span>
+    </div>
+    <div class="price-main">₹699</div>
+    <div class="price-note">Sirf ₹7 per din se bhi kam!</div>
+    <div class="trust-row">
+      <span>🔒 Secure Razorpay</span>
+      <span>📱 Instant WhatsApp</span>
+    </div>
+    <a href="https://rzp.io/rzp/EVuRCB5Q" target="_blank" class="btn-primary">START MY TRANSFORMATION →</a>
+    <div class="btn-secure">🛡️ 100% Safe & Secure Payments</div>
+    <div class="delivery-note">✅ Payment ke baad turant WhatsApp pe poora plan mil jaayega!</div>
+  </div>
+</section>
+
+<!-- PAIN POINTS -->
+<section class="pain">
+  <div class="section-eyebrow">Kya ye aapki story hai?</div>
+  <h2 class="section-title">Kya aap bhi in problems se pareshan hain?</h2>
+  <div class="pain-grid">
+    <div class="pain-card"><span>👗</span>Favourite dress fit nahi aati</div>
+    <div class="pain-card"><span>📸</span>Photos click karwane ka mann nahi karta</div>
+    <div class="pain-card"><span>😔</span>Belly bahar aa gayi hai</div>
+    <div class="pain-card"><span>🥗</span>Har baar diet start hoti hai, fir chhoot jaati hai</div>
+    <div class="pain-card"><span>⏰</span>Gym jane ka time hi nahi</div>
+    <div class="pain-card"><span>😞</span>Confidence kam ho gaya, khud pasand nahi aati</div>
+  </div>
+</section>
+
+<!-- IMAGINE -->
+<section class="imagine">
+  <div class="section-eyebrow">Imagine... Sirf 90 din baad</div>
+  <h2 class="section-title">Mirror me khud ko dekhkar smile karna kaisa hoga? ❤️</h2>
+  <ul class="imagine-list">
+    <li><span class="check-white">✓</span>Wahi favourite dress jo fit nahi aati thi, ab perfectly fit aayegi.</li>
+    <li><span class="check-white">✓</span>Belly pehle se flatter feel hogi.</li>
+    <li><span class="check-white">✓</span>Log bolenge — "Wow! Tum pehle se kaafi fit lag rahi ho."</li>
+    <li><span class="check-white">✓</span>Sabse important — Aap khud ko fir se pyaar karne lagogi.</li>
+  </ul>
+</section>
+
+<!-- REAL TRANSFORMATIONS -->
+<section class="transformations">
+  <div class="section-eyebrow">Real Transformations</div>
+  <h2 class="section-title">Unki Kahani, Unke Alfaaz</h2>
+
+  <!-- Asha -->
+  <div class="testimonial-card">
+    <div class="before-after">
+      <figure>
+        <img src="lady-before.webp" alt="Asha pehle" />
+        <div class="ba-label">Before</div>
+      </figure>
+      <figure>
+        <img src="lady-after.webp" alt="Asha ab" />
+        <div class="ba-label">After</div>
+      </figure>
+    </div>
+    <div class="testimonial-name">Asha</div>
+    <div class="testimonial-loc">Lucknow</div>
+    <div class="stars">★★★★★</div>
+    <p>Honestly mujhe zyada umeed nahi thi. Gym join kiya tha, 2 hafte mein band kar diya. Diet try ki, kuch nahi hua. Par is baar sirf khane ka order change kiya — bas itna!</p>
+    <p>2-3 hafte mein hi clothes loose hone lage. Face pe glow aaya — dosto ne bhi notice kiya! Aur energy itni badh gayi ki din bhar kaam karne mein mann lagta hai.</p>
+    <p>Koi bhari diet nahi, koi gym nahi — sirf sahi tarika. Itna simple tha aur itna effective — khud hairaan hoon!</p>
+  </div>
+
+  <!-- Riti -->
+  <div class="testimonial-card">
+    <div class="before-after">
+      <figure>
+        <img src="riti-before.webp.jpeg" alt="Riti pehle" />
+        <div class="ba-label">Before</div>
+      </figure>
+      <figure>
+        <img src="riti-after.webp.jpeg" alt="Riti ab" />
+        <div class="ba-label">After</div>
+      </figure>
+    </div>
+    <div class="testimonial-name">Riti</div>
+    <div class="testimonial-loc">Jaipur</div>
+    <div class="stars">★★★★★</div>
     <p>Mujhe sacchi mein umeed nahi thi ki ghar baithe itna fark pad sakta hai. Maine sirf 10-15 minute daily exercise ki — aur khane mein chote chote changes kiye. Koi gym nahi, koi bhari diet nahi.</p>
     <p>Dheere dheere 8kg kam hua — aur sabse badi baat, meri party wear dresses jo saalon se almari mein thi, wo sab fit aane lagi!</p>
     <p>Ab kisi bhi function mein jaane se darne ki zaroorat nahi! Main bahut khush hoon ki maine ye decision liya.</p>
   </div>
-</div>
-      </div>
-    </section>
 
-    <!-- FAQ -->
-    <section class="faq">
-      <div class="container">
-        <h2 class="section-title">Aapke sawal, hamare jawab</h2>
-        <div class="faq-list">
-          <div class="faq-item">
-            <button class="faq-q" aria-expanded="false">
-              <span>Kya gym jaana zaroori hai?</span>
-              <span class="faq-toggle">&#8250;</span>
-            </button>
-            <div class="faq-a"><p>Bilkul nahi. Ye program poori tarah ghar par kiya ja sakta hai. Sirf 10&ndash;15 minute ki halki exercise, koi equipment ya gym membership ki zaroorat nahi.</p></div>
-          </div>
-          <div class="faq-item">
-            <button class="faq-q" aria-expanded="false">
-              <span>Kya mujhe apna khana chodna padega?</span>
-              <span class="faq-toggle">&#8250;</span>
-            </button>
-            <div class="faq-a"><p>Nahi. Roti, chawal, daal — ghar ka normal khana chalta rahega. Sirf khane ka order aur kuch simple aadaton mein badlaav karna hota hai.</p></div>
-          </div>
-          <div class="faq-item">
-            <button class="faq-q" aria-expanded="false">
-              <span>Result kab tak dikhega?</span>
-              <span class="faq-toggle">&#8250;</span>
-            </button>
-            <div class="faq-a"><p>Zyadatar log 2&ndash;3 hafte mein farak mehsoos karne lagte hain. Consistency ke saath 3 mahine mein complete transformation dikhta hai.</p></div>
-          </div>
-          <div class="faq-item">
-            <button class="faq-q" aria-expanded="false">
-              <span>Kya koi supplement leni padegi?</span>
-              <span class="faq-toggle">&#8250;</span>
-            </button>
-            <div class="faq-a"><p>Koi supplement, powder ya extra cost nahi. Sab kuch natural aur sustainable changes par based hai.</p></div>
-          </div>
-        </div>
-      </div>
-    </section>
+  <a href="https://rzp.io/rzp/EVuRCB5Q" target="_blank" class="btn-primary">Aur Success Stories Dekhen →</a>
+</section>
 
-    <!-- Pricing -->
-    <section class="pricing" id="pricing">
-      <div class="container">
-        <div class="price-card">
-          <p class="price-eyebrow">SIRF EK BAAR KA PAYMENT</p>
-          <p class="price">&#8377;699</p>
-          <p class="price-name">Complete Transformation Program</p>
-          <p style="font-size:14px; color:#2D5249; font-weight:600; margin-top:8px;">✅ Payment ke baad WhatsApp pe turant poora plan mil jaayega!</p>
-          <a href="https://rzp.io/rzp/fTl1FXTi" target="_blank" class="btn btn-primary">Apna plan abhi lo</a>
-        </div>
-      </div>
-    </section>
-  </main>
+<!-- WHATSAPP REVIEWS -->
+<section class="wa-reviews">
+  <div class="section-eyebrow">Hamari Member Ka Kya Kehna Hai?</div>
+  <h2 class="section-title">Real WhatsApp Reviews</h2>
 
-  <!-- Footer -->
-<footer class="site-footer">
-    <div class="container">
-        <p class="footer-logo">Khud Ke Liye</p>
-        <p class="footer-tag">Ghar pe, bina gym, bina diet change</p>
-        <p class="footer-copy">&copy; 2026 Khud ke Liye. All rights reserved.</p>
-        <p style="margin-top:8px; font-size:13px;">
-            <a href="https://wa.me/916287338461" style="color:#B5482C;">WhatsApp: +91 6287338461</a>
-        </p>
-        <p style="font-size:13px;">
-            <a href="mailto:shivamstore1313@gmail.com" style="color:#B5482C;">shivamstore1313@gmail.com</a>
-        </p>
-        <p style="margin-top:8px; font-size:13px;">
-            <a href="privacy-policy.html" style="color:#B5482C;">Privacy Policy</a> | 
-            <a href="terms.html" style="color:#B5482C;">Terms & Conditions</a> | 
-            <a href="refund-policy.html" style="color:#B5482C;">Refund Policy</a>
-        </p>
+  <div class="wa-header">
+    <div class="wa-avatar">K</div>
+    <div>
+      <strong style="font-size:13px;">Khud Ke Liye Members</strong>
+      <div style="font-size:11px;color:#888;">WhatsApp Group</div>
     </div>
+  </div>
+
+  <div class="wa-chat">2 hafte me hi pet kam dikhne laga, energy bohot badh gayi hai! ❤️<div class="wa-time">11:46 AM ✓✓</div></div>
+  <div class="wa-chat">Workouts bahut easy hain, busy schedule me bhi follow kar pa rahi hun.<div class="wa-time">11:48 AM ✓✓</div></div>
+  <div class="wa-chat">Maine 7kg lose kiya aur ab dresses fit aa rahi hain!<div class="wa-time">11:50 AM ✓✓</div></div>
+  <div class="wa-chat">Best part — no diet tension, normal ghar ka khana! ❤️<div class="wa-time">11:53 AM ✓✓</div></div>
+
+  <a href="https://rzp.io/rzp/EVuRCB5Q" target="_blank" class="btn-primary" style="margin-top:16px;">Aur Bhi Reviews WhatsApp Par Dekhen →</a>
+</section>
+
+<!-- WHAT YOU GET -->
+<section class="benefits">
+  <div class="section-eyebrow">Is Program Me Kya Milega?</div>
+  <h2 class="section-title">Aapko Kya Milega</h2>
+  <ul class="benefit-list">
+    <li class="benefit-item">
+      <span class="benefit-icon">📅</span>
+      <div class="benefit-text"><strong>90 Days Complete Roadmap</strong><span>Din-by-din ka poora plan — koi confusion nahi</span></div>
+    </li>
+    <li class="benefit-item">
+      <span class="benefit-icon">🏃‍♀️</span>
+      <div class="benefit-text"><strong>Daily 10–15 Min Follow Along Workouts</strong><span>Ghar pe, koi equipment nahi chahiye</span></div>
+    </li>
+    <li class="benefit-item">
+      <span class="benefit-icon">🍛</span>
+      <div class="benefit-text"><strong>Indian Meal Guide (Ghar ka khana)</strong><span>Roti, chawal, daal — kuch nahi chodna</span></div>
+    </li>
+    <li class="benefit-item">
+      <span class="benefit-icon">📊</span>
+      <div class="benefit-text"><strong>Progress Tracker</strong><span>Apni progress dekho, motivated raho</span></div>
+    </li>
+    <li class="benefit-item">
+      <span class="benefit-icon">💪</span>
+      <div class="benefit-text"><strong>Mindset & Motivation</strong><span>Khud ko strong banao — andar se bhi</span></div>
+    </li>
+    <li class="benefit-item">
+      <span class="benefit-icon">🎁</span>
+      <div class="benefit-text"><strong>Bonus Goodies</strong><span>Exclusive templates aur resources</span></div>
+    </li>
+    <li class="benefit-item">
+      <span class="benefit-icon">♾️</span>
+      <div class="benefit-text"><strong>Lifetime Access</strong><span>Hamesha ke liye — kabhi expire nahi hoga</span></div>
+    </li>
+  </ul>
+  <div class="delivery-note" style="margin-top:16px;">📱 Payment ke baad turant WhatsApp pe deliver hoga!</div>
+</section>
+
+<!-- VS TABLE -->
+<section class="vs-section">
+  <div class="section-eyebrow">Comparison</div>
+  <h2 class="section-title">Dusre Programs VS Khud Ke Liye</h2>
+  <div class="vs-table">
+    <div class="vs-header bad">❌ Dusre Programs</div>
+    <div class="vs-middle-header">VS</div>
+    <div class="vs-header good">✅ Khud Ke Liye</div>
+
+    <div class="vs-cell bad"><span class="x-icon">✗</span>Expensive gym memberships</div>
+    <div class="vs-cell mid"></div>
+    <div class="vs-cell good"><span class="check-icon">✓</span>Ghar par easy workouts</div>
+
+    <div class="vs-cell bad"><span class="x-icon">✗</span>Costly supplements</div>
+    <div class="vs-cell mid"></div>
+    <div class="vs-cell good"><span class="check-icon">✓</span>Normal Indian food</div>
+
+    <div class="vs-cell bad"><span class="x-icon">✗</span>Strict diet & bhookh</div>
+    <div class="vs-cell mid"></div>
+    <div class="vs-cell good"><span class="check-icon">✓</span>No supplements, no extra cost</div>
+
+    <div class="vs-cell bad"><span class="x-icon">✗</span>Time consuming</div>
+    <div class="vs-cell mid"></div>
+    <div class="vs-cell good"><span class="check-icon">✓</span>Sirf 10–15 min daily</div>
+
+    <div class="vs-cell bad"><span class="x-icon">✗</span>Sustainable nahi</div>
+    <div class="vs-cell mid"></div>
+    <div class="vs-cell good"><span class="check-icon">✓</span>Sustainable & long term results</div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq">
+  <div class="section-eyebrow">Aapke Sawal, Hamare Jawab</div>
+  <h2 class="section-title">FAQ</h2>
+  <div class="faq-item">
+    <button class="faq-q" onclick="toggleFaq(this)">Kya gym jaana zaroori hai? <span>+</span></button>
+    <div class="faq-a">Bilkul nahi! Ye program sirf ghar pe kiya ja sakta hai — koi equipment ya gym ki zaroorat nahi.</div>
+  </div>
+  <div class="faq-item">
+    <button class="faq-q" onclick="toggleFaq(this)">Kya mujhe apna khana chodna padega? <span>+</span></button>
+    <div class="faq-a">Nahi! Roti, chawal, daal — sab kuch khate rahein. Sirf khane ke order mein thoda change hoga.</div>
+  </div>
+  <div class="faq-item">
+    <button class="faq-q" onclick="toggleFaq(this)">Result kab tak dikhne lagega? <span>+</span></button>
+    <div class="faq-a">Zyaadatar members ko 2 hafte mein hi visible fark dikhna shuru ho jaata hai!</div>
+  </div>
+  <div class="faq-item">
+    <button class="faq-q" onclick="toggleFaq(this)">Kya koi supplement leni padegi? <span>+</span></button>
+    <div class="faq-a">Bilkul nahi! Koi supplement, powder ya extra kharcha nahi — sirf real, sustainable changes.</div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final-cta">
+  <div class="final-offer">
+    <div class="offer-badge">🔥 Special Limited Time Offer</div>
+    <div class="offer-original">Worth ₹1999</div>
+    <div style="font-size:13px;color:var(--text-soft);margin-bottom:4px;">Today Only</div>
+    <div class="offer-price">₹699</div>
+    <div class="offer-save">YOU SAVE ₹1300</div>
+    <div style="display:flex;justify-content:center;gap:16px;font-size:12px;color:var(--text-soft);margin-bottom:14px;">
+      <span>🔄 One Time Payment</span>
+      <span>⚡ Instant Access</span>
+    </div>
+    <a href="https://rzp.io/rzp/EVuRCB5Q" target="_blank" class="btn-primary">YES! I WANT MY TRANSFORMATION →</a>
+    <div class="btn-secure" style="margin-top:8px;">🔒 Secure Razorpay Checkout</div>
+    <div class="payment-methods">
+      <span class="pm-badge">VISA</span>
+      <span class="pm-badge">Mastercard</span>
+      <span class="pm-badge">UPI</span>
+      <span class="pm-badge">Razorpay</span>
+    </div>
+  </div>
+  <div class="trust-badges">
+    <div class="trust-badge"><span>🔒</span>100% Secure Payment</div>
+    <div class="trust-badge"><span>📱</span>Instant WhatsApp Delivery</div>
+    <div class="trust-badge"><span>⏰</span>Work At Home Beginners Friendly</div>
+  </div>
+</section>
+
+<!-- FUTURE -->
+<section class="future">
+  <div class="section-eyebrow" style="color:rgba(255,255,255,0.7);">Future Wali Aap...</div>
+  <h2>Aaj Wale Decision Ke Liye Thank You Bolegi ❤️</h2>
+  <p>Wo version of you jo mirror mein khud ko dekh ke smile karti hai — woh sirf 90 din door hai.</p>
+  <a href="https://rzp.io/rzp/EVuRCB5Q" target="_blank" class="btn-primary" style="background:white;color:var(--terracotta);">APNA TRANSFORMATION JOURNEY AAJ SE SHURU KAREIN →</a>
+  <div class="trust-badges" style="margin-top:16px;">
+    <div class="trust-badge" style="color:rgba(255,255,255,0.8);"><span>⚡</span>Instant Access</div>
+    <div class="trust-badge" style="color:rgba(255,255,255,0.8);"><span>♾️</span>Lifetime Access</div>
+    <div class="trust-badge" style="color:rgba(255,255,255,0.8);"><span>🏠</span>Work At Home</div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Khud Ke Liye ❤️</div>
+  <div class="footer-tagline">Ghar pe, bina gym, bina diet change. Khud ko fir se pyaar karne ka safar.</div>
+  <div class="footer-contact">
+    <a href="https://wa.me/916287338461">WhatsApp: +91 6287338461</a> |
+    <a href="mailto:shivamstore1313@gmail.com">shivamstore1313@gmail.com</a>
+  </div>
+  <div class="footer-links">
+    <a href="privacy-policy.html">Privacy Policy</a> |
+    <a href="terms.html">Terms & Conditions</a> |
+    <a href="refund-policy.html">Refund Policy</a>
+  </div>
+  <div class="footer-copy">© 2026 Khud Ke Liye. All rights reserved. Made with ❤️ for You</div>
 </footer>
 
-  <script src="script.js"></script>
+<script>
+  function playVideo() {
+    const wrap = document.getElementById('videoWrap');
+    const frame = document.getElementById('videoFrame');
+    frame.src = 'https://www.youtube.com/embed/IlsJGDzXMPI?autoplay=1';
+    wrap.classList.add('playing');
+  }
+
+  function toggleFaq(btn) {
+    const answer = btn.nextElementSibling;
+    const icon = btn.querySelector('span');
+    answer.classList.toggle('open');
+    icon.textContent = answer.classList.contains('open') ? '−' : '+';
+  }
+</script>
+
 </body>
 </html>
